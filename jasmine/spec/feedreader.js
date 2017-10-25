@@ -35,7 +35,7 @@ $(function() {
         it('URL has defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url).not.toBe(" ");
+                expect(feed.url).not.toBe("");
             });
         });
 
@@ -50,7 +50,7 @@ $(function() {
         it('name has defined ', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
-
+                expect(feed.name).not.toBe("");
             });
         });
 
@@ -60,46 +60,34 @@ $(function() {
 
     /* TODO: Write a new test suite named "The menu" */
 
-    describe('The menu:', function() {
-
-
+    describe('The menu', function() {
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-
-        it('is hidden by default', function() {
-            expect($('body').hasClass('menu-hidden')).toBe(false);
+        it('Menu element is hidden', function() {
+            expect(document.body.className).toContain('menu-hidden');
         });
-
 
         /* TODO: Write a test that ensures the menu changes
          * visibility when the menu icon is clicked. This test
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
-        it('hides the menu when clicked', function() {
-
-            // grab feed list from the DOM
-            feedList = $('.feed-list');
-
-            // show the menu
-            $('body').removeClass('menu-hidden');
-
-            // add click event
-            feedList.on('click', 'a', function() {
-                $('body').addClass('menu-hidden');
-            });
-
-            menuIcon = $('.menu-icon-link');
-            menuIcon.click();
-
-            // class 'menu-hidden' should exist
-            expect(document.body.classList.contains('menu-hidden')).toBeTruthy();
+        it("Menu displayed when clicked", function() {
+            $('.menu-icon-link').trigger('click');
+            expect($('body')).not.toContain("menu-hidden");
         });
-    });
 
+        it("Menu hidden when clicked again", function() {
+            $('.menu-icon-link').trigger('click');
+            var hidden = $('body').hasClass("menu-hidden");
+            expect(hidden).toBe(true);
+
+        });
+
+    });
 
 
 
@@ -118,16 +106,18 @@ $(function() {
         });
 
         it("should have at least 1 .entry in the .feed container", function(done) {
-            expect($('.feed').children().length).not.toBe(0);
+
+            var entry = $(".feed").size();
+            expect(entry).not.toBe(0);
             done();
         });
 
 
-       
+
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
-    describe('New Feed Selection', function(done) {
+    describe('New Feed Selection', function() {
         /* test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
@@ -155,10 +145,7 @@ $(function() {
             done();
         });
 
-        // restore original state 
-        afterAll(function(done) {
-            loadFeed(0, done);
-        });
+
 
     });
 
