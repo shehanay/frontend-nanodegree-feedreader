@@ -77,7 +77,7 @@ $(function() {
          */
         it("Menu displayed when clicked", function() {
             $('.menu-icon-link').trigger('click');
-            expect($('body')).hasClass("menu-hidden");;
+            expect($('body')).hasClass("menu-hidden");
         });
 
         it("Menu hidden when clicked again", function() {
