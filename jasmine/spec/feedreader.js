@@ -67,7 +67,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it('Menu element is hidden', function() {
-            expect(document.body.classList).toContain('menu-hidden');
+             expect($(document.body).hasClass('menu-hidden')).toBe(true);
         });
 
         /*  Write a test that ensures the menu changes
@@ -76,14 +76,10 @@ $(function() {
          * clicked and does it hide when clicked again.
          */
         it("Menu displayed when clicked", function() {
-            $('.menu-icon-link').trigger('click');
-            expect($('body')).hasClass("menu-hidden");
-        });
-
-        it("Menu hidden when clicked again", function() {
-            $('.menu-icon-link').trigger('click');
-            var hidden = $('body').hasClass("menu-hidden");
-            expect(hidden).toBe(true);
+            $('a.menu-icon-link').click();
+            expect(document.body.className).not.toContain('menu-hidden');
+            $('a.menu-icon-link').click();
+            expect(document.body.className).toContain('menu-hidden');
 
         });
 
